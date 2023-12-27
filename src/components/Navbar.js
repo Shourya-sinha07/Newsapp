@@ -1,8 +1,12 @@
 // for funtion base component press rfc and enter and for class base component type rcep + enter
-import React, { Component } from "react";
+// import React, { Component } from "react";
 import { Link } from "react-router-dom";
-export class Navbar extends Component {
-  render() {
+
+// converting navbar into function based component 
+
+// export class Navbar extends Component {   => this is for class based component
+const Navbar=()=>{
+  // render() { =>comminting out render function for funtion based component 
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary ">
@@ -69,7 +73,7 @@ export class Navbar extends Component {
         </nav>
       </div>
     );
-  }
+  // } =>comminting out render function closing bracket for funtion based component
 }
 
 export default Navbar;

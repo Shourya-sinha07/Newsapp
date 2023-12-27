@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";  remove this line in function based component
 // import "./comp.css"
-export class NewsItem extends Component {
-  render() {
-    // let { title, description, imageUrl, newsUrl } = this.props;
+// export class NewsItem extends Component { remove this line for funtion based component
+const  NewsItem=(props)=>{
+  // render() { remove render funtion
+    let { title, description, imageUrl, newsUrl,author,date,source } = props;
     return (
       <div className="container">
 
@@ -14,33 +15,33 @@ export class NewsItem extends Component {
           <div style={{display:'flex',position:'absolute',right:'0'}}>
 
             <span className=" badge rounded-pill bg-danger" style={{zIndex:"2" ,left:"90%"}}>
-              {this.props.source}
+              {source}
             </span>
           </div>
           <img
             src={
-              !this.props.imageUrl
+              !imageUrl
                 ? "https://www.livemint.com/lm-img/img/2023/12/12/1600x900/stock_1702392219404_1702392219570.jpg"
-                : this.props.imageUrl
+                : imageUrl
             }
             className="card-img-top"
             alt="..."
           />
           {/* you can access props in class using two way 1:- let { title, description, imageUrl, newsUrl } = this.props;
-                                                      2:-using this.props.title or this.props.decription etc */}
+                                                      2:-using title or decription etc */}
 
           <div className="card-body ">
-            <h5 className="card-title">{this.props.title}</h5>
+            <h5 className="card-title">{title}</h5>
 
-            <p className="card-text">{this.props.description}</p>
+            <p className="card-text">{description}</p>
             <p className="card-text">
               <small className="text-muted">
-                By {!this.props.author ? "Unknown" : this.props.author} on{" "}
-                {new Date(this.props.date).toGMTString()}
+                By {!author ? "Unknown" : author} on{" "}
+                {new Date(date).toGMTString()}
               </small>
             </p>
             <a
-              href={this.props.newsUrl}
+              href={newsUrl}
               target="blank"
               className="btn btn-dark"
             >
@@ -51,7 +52,7 @@ export class NewsItem extends Component {
       </div>
       </div>
     );
-  }
+  // } remove render funtion
 }
 
 export default NewsItem;

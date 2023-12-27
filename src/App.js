@@ -60,7 +60,7 @@ export default class App extends Component {
             <Route exact
               path="/science"
               element={
-                <News setProgress={this.setProgress}  key="science" pageSize={this.pageSize} country="in" category="science"></News>
+                <News setProgress={this.setProgress} apikey={this.apikey} key="science" pageSize={this.pageSize} country="in" category="science"></News>
               }
             />
             <Route exact
