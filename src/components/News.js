@@ -26,10 +26,10 @@ const [articles ,setArticles]=useState([])
 const [loading ,setLoading]=useState(true)
 const [page ,setPage]=useState(1)
 const [totalResults ,seTotalResults]=useState(0)
-// document.title = `${capatalize(props.category)} - Cookru-ku`;
-  const capatalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+const capatalize = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+document.title = `${capatalize(props.category)} - Cookru-ku`;
 
   //commenting out constructor in funtion based component
   // constructor(props) {
@@ -45,39 +45,41 @@ const [totalResults ,seTotalResults]=useState(0)
   // }
   // console.log(props.check)
 
+//Now we dont use updatenews funnction we will use updatenews when we use previous and next button so we comment out this
+  // const updateNews=async()=>{
+  //   props.setProgress(0)
+  //   const url = `https://newsapi.org/v2/top-headlines?country=${
+  //     props.country
+  //   }&category=${
+  //     props.category
+  //   }&apiKey=${props.apikey}&page=${
+  //     page + 1
+  //   }&pageSize=${props.pageSize}`;
+  //   //  console.log(props.check)
+  //   // setState({ loading: true });
+  //   setLoading(true)
 
-  const updateNews=async()=>{
-    props.setProgress(0)
-    const url = `https://newsapi.org/v2/top-headlines?country=${
-      props.country
-    }&category=${
-      props.category
-    }&apiKey=${props.apikey}&page=${
-      page + 1
-    }&pageSize=${props.pageSize}`;
-    //  console.log(props.check)
-    // setState({ loading: true });
-    setLoading(true)
+  //   let data = await fetch(url);
+  //   let parsedata = await data.json();
+  //   // console.log(parsedata);
+  //   setArticles(parsedata.articles);
+  //   seTotalResults(parsedata.totalResults);
+  //   setLoading(false)
 
-    let data = await fetch(url);
-    let parsedata = await data.json();
-    // console.log(parsedata);
-    setArticles(parsedata.articles);
-    seTotalResults(parsedata.totalResults);
-    setLoading(false)
-
-      //  we comment out setState eecause we not usethis in function based component 
-    // setState({                     
-    //   articles: parsedata.articles,
-    //   totalResults: parsedata.totalResults,
-    //   loading: false,
-    // });
-  }
+  //     //  we comment out setState eecause we not usethis in function based component 
+  //   // setState({                     
+  //   //   articles: parsedata.articles,
+  //   //   totalResults: parsedata.totalResults,
+  //   //   loading: false,
+  //   // });
+  // }
 
   useEffect( ()=>{
     const fetchData = async () => {
       props.setProgress(10);
-      let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apikey}&pageSize=${props.pageSize}`;
+      let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apikey}&page=${
+        page 
+      }&pageSize=${props.pageSize}`;
       console.log(props.check);
 
       setLoading(true);
@@ -103,7 +105,9 @@ const [totalResults ,seTotalResults]=useState(0)
 
     fetchData();
     // updateNews();
-  },[]); //in last it has a blank [] this will take parameter that on what change this function is run we keep it blank so it will run only one time like componentdidMount()
+    //eslint-disable-next-line
+  },[]);
+   //in last it has a blank [] this will take parameter that on what change this function is run we keep it blank so it will run only one time like componentdidMount()
 
 
 // we comment out componentDidMount Instead of using componentDidMount in function component we use useEffect
@@ -150,8 +154,10 @@ const [totalResults ,seTotalResults]=useState(0)
   // };
 
  const fetchMoreData = () => {
+
+  console.log("first pages =",page)
     setTimeout(async () => {
-      // setPage(page +1)
+      console.log("pages =",page)
       // setState({
       //   page: page + 1,
       // });
@@ -160,9 +166,12 @@ const [totalResults ,seTotalResults]=useState(0)
       }&category=${
         props.category
       }&apiKey=${props.apikey}&page=${
-        page + 1
+        page +1
       }&pageSize=${props.pageSize}`;
+      setPage(page +1)
+
       //  console.log(props.check)
+      console.log("again page",page)
       let data = await fetch(url);
       let parsedata = await data.json();
       // console.log(parsedata);
@@ -175,6 +184,7 @@ const [totalResults ,seTotalResults]=useState(0)
       seTotalResults(parsedata.totalResults);
       setLoading(false)
 
+      
     }, 1500);
   };
   // render() { commenting out render funtion beacause it is not use in funtion base component so we comment out this render funtion 
@@ -183,7 +193,7 @@ const [totalResults ,seTotalResults]=useState(0)
     return (
       <div className="container my-4">
         <div className="row d-flex">
-          <h2 className="text-center">
+          <h2 className="text-center" style={{marginTop:"40px"}}>
             News Headlines from {capatalize(props.category)} Category
           </h2>
           {/* <i class="fa-solid fa-mug-hot"></i> */}
